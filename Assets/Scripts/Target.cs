@@ -40,14 +40,21 @@ public class Target : MonoBehaviour
     }
    
     private void OnMouseDown() 
-    { //when mouse is 'down' inside object collider
+    { 
+        if(gameManager.isGameActive)
+        {
+        //when mouse is 'down' inside object collider
         Destroy(gameObject);
         Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
         gameManager.UpdateScore(pointValue); //uses updatescore method from gamemanager script
+        }
+        
+
 
     }
     private void OnTriggerEnter(Collider other) {
         Destroy(gameObject);
+        if (!gameObject.CompareTag("Bad")) {gameManager.GameOver();}
     }
     
     
